@@ -129,9 +129,15 @@ define('skylark-langx/skylark',[
 	return ns;
 });
 
-define('skylark-pdfjs/pdf',[
-],function(){
-return /******/ (() => { // webpackBootstrap
+define('skylark-pdfjs-display/pdfjs',[
+	"skylark-langx/skylark"
+],function(skylark) {
+	return skylark.attach("intg.pdfjs");
+});
+define('skylark-pdfjs-display/display',[
+  "./pdfjs"
+],function(pdfjs){
+return pdfjs.display = /******/ (() => { // webpackBootstrap
 /******/  "use strict";
 /******/  var __webpack_modules__ = ([
 /* 0 */
@@ -3029,7 +3035,8 @@ return /******/ (() => { // webpackBootstrap
       let mainWorkerMessageHandler;
 
       try {
-        mainWorkerMessageHandler = globalThis.pdfjsWorker && globalThis.pdfjsWorker.WorkerMessageHandler;  // lwf
+        ///mainWorkerMessageHandler = globalThis.pdfjsWorker && globalThis.pdfjsWorker.WorkerMessageHandler;  // lwf
+        mainWorkerMessageHandler = pdfjs.worker.WorkerMessageHandler; 
       } catch (ex) {}
 
       return mainWorkerMessageHandler || null;
@@ -15198,16 +15205,15 @@ return /******/ (() => { // webpackBootstrap
 ;
 });
 
-define('skylark-pdfjs/main',[
-	"skylark-langx/skylark",
-	"./pdf"
-],function(skylark,pdfjs) {
-	return skylark.attach("intg.pdfjs",pdfjs);
+define('skylark-pdfjs-display/main',[
+	"./display"
+],function(display) {
+	return display;
 });
-define('skylark-pdfjs', ['skylark-pdfjs/main'], function (main) { return main; });
+define('skylark-pdfjs-display', ['skylark-pdfjs-display/main'], function (main) { return main; });
 
 define('skylark-pdfjs-viewer/viewer',[
-  "skylark-pdfjs"
+  "skylark-pdfjs-display"
 ],function(pdfjsLib){
 
 /******/ (() => { // webpackBootstrap

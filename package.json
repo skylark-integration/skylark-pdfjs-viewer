@@ -25,7 +25,7 @@
   "bugs": "https://github.com/skylarkjs/skylark/issues",
   "dependencies": {
     "skylark-langx": "git+https://github.com/skylark-langx/skylark-langx.git#master",
-    "skylark-pdfjs": "git+https://github.com/skylark-integration/skylark-pdfjs.git",
+    "skylark-pdfjs-display": "git+https://github.com/skylark-integration/skylark-pdfjs-display.git",
     "skylark-pdfjs-worker": "git+https://github.com/skylark-integration/skylark-pdfjs-worker.git"
   },
   "files": [

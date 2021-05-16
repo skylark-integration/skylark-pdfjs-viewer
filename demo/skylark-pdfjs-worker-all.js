@@ -55525,7 +55525,7 @@ define('skylark-pdfjs-worker/main',[
 	"skylark-langx/skylark",
 	"./worker"
 ],function(skylark,worker) {
-	return skylark.attach("intg.pdfworker",worker);
+	return skylark.attach("intg.pdfjs.worker",worker);
 });
 define('skylark-pdfjs-worker', ['skylark-pdfjs-worker/main'], function (main) { return main; });
 

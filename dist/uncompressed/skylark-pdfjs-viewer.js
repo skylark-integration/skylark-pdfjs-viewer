@@ -87,7 +87,7 @@
 })(function(define,require) {
 
 define('skylark-pdfjs-viewer/viewer',[
-  "skylark-pdfjs"
+  "skylark-pdfjs-display"
 ],function(pdfjsLib){
 
 /******/ (() => { // webpackBootstrap

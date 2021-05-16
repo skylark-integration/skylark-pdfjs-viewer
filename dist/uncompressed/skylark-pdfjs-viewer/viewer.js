@@ -1,5 +1,5 @@
 define([
-  "skylark-pdfjs"
+  "skylark-pdfjs-display"
 ],function(pdfjsLib){
 
 /******/ (() => { // webpackBootstrap
