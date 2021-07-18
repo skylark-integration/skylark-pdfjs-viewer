@@ -34,6 +34,11 @@ See https://github.com/adobe-type-tools/cmap-resources
 
 <!-- This snippet is used in production (included from viewer.html) -->
 <link rel="resource" type="application/l10n" href="locale/locale.properties">
+<script src="../dist/uncompressed/skylark-pdfjs-viewer-all.js"></script>
+<script src="skylark-pdfjs-worker.js"></script>
+<script>
+  require("skylark-pdfjs-worker");
+</script>
 
   </head>
 
@@ -402,14 +407,6 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     </div> <!-- outerContainer -->
     <div id="printContainer"></div>
-
-<script type="text/javascript" src="./require.js" data-main="./bootstrap.js"></script>
-
-<script>
-    var initPage = function(langx,domx) {
-
-    };
-</script>
   </body>
 </html>
 

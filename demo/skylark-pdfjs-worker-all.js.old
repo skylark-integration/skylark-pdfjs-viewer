@@ -86,10 +86,51 @@
 
 })(function(define,require) {
 
+define('skylark-langx-ns/_attach',[],function(){
+    return  function attach(obj1,path,obj2) {
+        if (typeof path == "string") {
+            path = path.split(".");//[path]
+        };
+        var length = path.length,
+            ns=obj1,
+            i=0,
+            name = path[i++];
+
+        while (i < length) {
+            ns = ns[name] = ns[name] || {};
+            name = path[i++];
+        }
+
+        ns[name] = obj2 || {};
+        return ns[name];
+    }
+});
+define('skylark-langx-ns/ns',[
+    "./_attach"
+], function(_attach) {
+    var skylark = {
+    	attach : function(path,obj) {
+    		return _attach(skylark,path,obj);
+    	}
+    };
+    return skylark;
+});
+
+define('skylark-langx-ns/main',[
+	"./ns"
+],function(skylark){
+	return skylark;
+});
+define('skylark-langx-ns', ['skylark-langx-ns/main'], function (main) { return main; });
+
+define('skylark-langx/skylark',[
+    "skylark-langx-ns"
+], function(ns) {
+	return ns;
+});
+
 define('skylark-pdfjs-worker/worker',[
-  "skylark-langx-objects",
-  "skylark-io-streams",
-],function(skylark_objects,skylark_streams){
+],function(){
 
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
@@ -8075,7 +8116,6 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.StringStream = exports.StreamsSequenceStream = exports.Stream = exports.RunLengthStream = exports.PredictorStream = exports.NullStream = exports.LZWStream = exports.FlateStream = exports.DecryptStream = exports.DecodeStream = exports.AsciiHexStream = exports.Ascii85Stream = void 0;
 
-/*
 var _util = __w_pdfjs_require__(2);
 
 var _primitives = __w_pdfjs_require__(5);
@@ -9369,9 +9409,6 @@ var NullStream = function NullStreamClosure() {
 }();
 
 exports.NullStream = NullStream;
-*/
-
-Object.assign(exports,skylark_streams);
 
 /***/ }),
 /* 13 */
@@ -55485,7 +55522,7 @@ class PDFWorkerStreamRangeReader {
 });
 
 define('skylark-pdfjs-worker/main',[
-	"skylark-langx-ns",
+	"skylark-langx/skylark",
 	"./worker"
 ],function(skylark,worker) {
 	return skylark.attach("intg.pdfjs.worker",worker);
@@ -55494,4 +55531,4 @@ define('skylark-pdfjs-worker', ['skylark-pdfjs-worker/main'], function (main) { 
 
 
 },this);
-//# sourceMappingURL=sourcemaps/skylark-pdfjs-worker.js.map
+//# sourceMappingURL=sourcemaps/skylark-pdfjs-worker-all.js.map

@@ -34,6 +34,13 @@ See https://github.com/adobe-type-tools/cmap-resources
 
 <!-- This snippet is used in production (included from viewer.html) -->
 <link rel="resource" type="application/l10n" href="locale/locale.properties">
+<script src="skylark-io-streams-all.js"></script>
+<script src="skylark-pdfjs-display.js"></script>
+<script src="skylark-pdfjs-worker.js"></script>
+<script src="../dist/uncompressed/skylark-pdfjs-viewer.js"></script>
+<script>
+  require("skylark-pdfjs-worker");
+</script>
 
   </head>
 
@@ -406,7 +413,17 @@ See https://github.com/adobe-type-tools/cmap-resources
 <script type="text/javascript" src="./require.js" data-main="./bootstrap.js"></script>
 
 <script>
-    var initPage = function(langx,domx) {
+      var initPage = function(langx,domx) {
+        var $ = domx.query;
+        $(function () {
+          $('#carousel-example-generic').plugin("lark.groups.carousel",{
+            mode : "slide"
+          }); 
+          $('#carousel-example-generic').focus();
+          $(document).on("keydown",function(evt){
+            console.log(evt.keyCode);
+          })
+        }); 
 
     };
 </script>
