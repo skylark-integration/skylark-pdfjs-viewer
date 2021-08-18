@@ -1,0 +1,9 @@
+/**
+ * skylark-pdfjs-viewer - A version of video.js that ported to running on skylarkjs.
+ * @author Hudaokeji Co.,Ltd
+ * @version v0.9.0
+ * @link www.skylarkjs.org
+ * @license MIT
+ */
+define(["skylark-pdfjs-display"],function(i){const{RenderingCancelledException:e}=i,t=3e4,r={INITIAL:0,RUNNING:1,PAUSED:2,FINISHED:3};return{PDFRenderingQueue:class{constructor(){this.pdfViewer=null,this.pdfThumbnailViewer=null,this.onIdle=null,this.highestPriorityPage=null,this.idleTimeout=null,this.printing=!1,this.isThumbnailViewEnabled=!1}setViewer(i){this.pdfViewer=i}setThumbnailViewer(i){this.pdfThumbnailViewer=i}isHighestPriority(i){return this.highestPriorityPage===i.renderingId}renderHighestPriority(i){this.idleTimeout&&(clearTimeout(this.idleTimeout),this.idleTimeout=null),this.pdfViewer.forceRendering(i)||this.pdfThumbnailViewer&&this.isThumbnailViewEnabled&&this.pdfThumbnailViewer.forceRendering()||this.printing||this.onIdle&&(this.idleTimeout=setTimeout(this.onIdle.bind(this),t))}getHighestPriority(i,e,t){const r=i.views,n=r.length;if(0===n)return null;for(let i=0;i<n;++i){const e=r[i].view;if(!this.isViewFinished(e))return e}if(t){const t=i.last.id;if(e[t]&&!this.isViewFinished(e[t]))return e[t]}else{const t=i.first.id-2;if(e[t]&&!this.isViewFinished(e[t]))return e[t]}return null}isViewFinished(i){return i.renderingState===r.FINISHED}renderView(i){switch(i.renderingState){case r.FINISHED:return!1;case r.PAUSED:this.highestPriorityPage=i.renderingId,i.resume();break;case r.RUNNING:this.highestPriorityPage=i.renderingId;break;case r.INITIAL:this.highestPriorityPage=i.renderingId,i.draw().finally(()=>{this.renderHighestPriority()}).catch(i=>{i instanceof e||console.error(`renderView: "${i}"`)})}return!0}},RenderingStates:r}});
+//# sourceMappingURL=sourcemaps/pdf_rendering_queue.js.map

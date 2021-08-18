@@ -1,5 +1,5 @@
 requirejs.config({
-	baseUrl : "../",
+	baseUrl : "./",
     paths: {
     },
       packages: [
@@ -311,7 +311,7 @@ require(["skylark-pdfjs-worker"], function (worker) {
     require("skylark-pdfjs-worker");
     require(["skylark-pdfjs-viewer"], function (viewer) {
         if (window.initPage) {
-            window.initPage(worker,viewer);
+            window.initPage(viewer);
         }
     });
 });

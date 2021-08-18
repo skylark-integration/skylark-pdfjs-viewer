@@ -1,0 +1,9 @@
+/**
+ * skylark-pdfjs-viewer - A version of video.js that ported to running on skylarkjs.
+ * @author Hudaokeji Co.,Ltd
+ * @version v0.9.0
+ * @link www.skylarkjs.org
+ * @license MIT
+ */
+define(["skylark-pdfjs-display","./base_viewer"],function(e,i){const{BaseViewer:r}=i,{shadow:t}=e;return{PDFSinglePageViewer:class extends r{constructor(e){super(e),this.eventBus._on("pagesinit",e=>{this._ensurePageViewVisible()})}get _viewerElement(){return t(this,"_viewerElement",this._shadowViewer)}get _pageWidthScaleFactor(){return 1}_resetView(){super._resetView(),this._previousPageNumber=1,this._shadowViewer=document.createDocumentFragment(),this._updateScrollDown=null}_ensurePageViewVisible(){const e=this._pages[this._currentPageNumber-1],i=this._pages[this._previousPageNumber-1],r=this.viewer.childNodes;switch(r.length){case 0:this.viewer.appendChild(e.div);break;case 1:if(r[0]!==i.div)throw new Error("_ensurePageViewVisible: Unexpected previously visible page.");if(e===i)break;this._shadowViewer.appendChild(i.div),this.viewer.appendChild(e.div),this.container.scrollTop=0;break;default:throw new Error("_ensurePageViewVisible: Only one page should be visible at a time.")}this._previousPageNumber=this._currentPageNumber}_scrollUpdate(){this._updateScrollDown&&this._updateScrollDown(),super._scrollUpdate()}_scrollIntoView({pageDiv:e,pageSpot:i=null,pageNumber:r=null}){r&&this._setCurrentPageNumber(r);const t=this._currentPageNumber>=this._previousPageNumber;this._ensurePageViewVisible(),this.update(),super._scrollIntoView({pageDiv:e,pageSpot:i,pageNumber:r}),this._updateScrollDown=(()=>{this.scroll.down=t,this._updateScrollDown=null})}_getVisiblePages(){return this._getCurrentVisiblePage()}_updateHelper(e){}get _isScrollModeHorizontal(){return t(this,"_isScrollModeHorizontal",!1)}_updateScrollMode(){}_updateSpreadMode(){}_getPageAdvance(){return 1}}}});
+//# sourceMappingURL=sourcemaps/pdf_single_page_viewer.js.map
