@@ -407,6 +407,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 
 <script>
     var initPage = function(viewer,langx,domx) {
+      viewer.PDFViewerApplicationOptions.set("cMapUrl","./cmaps/");
       viewer.init();
     };
 </script>
